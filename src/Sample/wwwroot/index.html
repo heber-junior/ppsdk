@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Sample SDK</title>
+    <style>
+        .object {
+            position: relative;
+            float: left;
+            height: 700px;
+            width: 700px;
+        }
+    </style>
+    <script src="http://localhost:9900/js/pp.sdk.min.js"></script>
+    <script>
+        function configure() {
+            var pp = window.powerplanning;
+            if (pp == null)
+                return;
+            pp.Configurate({ Url: 'http://localhost:9900' });
+        }
+
+        function impersonate() {
+            var pp = window.powerplanning;
+            if (pp == null)
+                return;
+            var el = document.getElementById('email');
+            pp.Impersonate(el.value);
+        }
+
+        function create1() {
+            var pp = window.powerplanning;
+            if (pp == null)
+                return;
+            var el = document.getElementById('obj1');
+            pp.Create(el, { Code: '109' });
+        }
+
+        function create2() {
+            var pp = window.powerplanning;
+            if (pp == null)
+                return;
+            var el = document.getElementById('obj2');
+            pp.Create(el, { Code: '109' });
+        }
+
+        function create3() {
+            var pp = window.powerplanning;
+            if (pp == null)
+                return;
+            var el = document.getElementById('obj3');
+            pp.Create(el, { Code: '109' });
+        }
+
+        function destroy() {
+            var pp = window.powerplanning;
+            if (pp == null)
+                return;
+            pp.Destroy();
+        }
+    </script>
+</head>
+<body>
+    <p>This is a sample of PowerPlanning SDK</p>
+    <input type="button" onclick="configure()" value="Configure" />
+    <input type="button" onclick="impersonate()" value="Impersonate" />
+    <input type="button" onclick="create1()" value="Create1" />
+    <input type="button" onclick="create2()" value="Create2" />
+    <input type="button" onclick="create3()" value="Create3" />
+    <input type="button" onclick="destroy()" value="Destroy" />
+    <br />
+    <span>User email:</span><input id="email" type="text" value="admin@sysphera.com" />
+    <br />
+    <div class="object" id="obj1"></div>
+    <div class="object" id="obj2"></div>
+    <div class="object" id="obj3"></div>
+</body>
+</html>
