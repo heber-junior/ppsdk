@@ -53,12 +53,21 @@
             });
         }
 
+        function CreateOptions()
+        {
+            var elc = document.getElementById('objectCode');
+            var obj = {};
+            obj.Code = elc.value;
+            return (obj);
+        }
+
         function create1() {
             var pp = window.powerplanning;
             if (pp == null)
                 return;
             var el = document.getElementById('obj1');
-            pp.Create(el, { Code: '109' });
+            
+            pp.Create(el, CreateOptions());
         }
 
         function create2() {
@@ -66,7 +75,7 @@
             if (pp == null)
                 return;
             var el = document.getElementById('obj2');
-            pp.Create(el, { Code: '109' });
+            pp.Create(el, CreateOptions());
         }
 
         function create3() {
@@ -74,7 +83,7 @@
             if (pp == null)
                 return;
             var el = document.getElementById('obj3');
-            pp.Create(el, { Code: '109' });
+            pp.Create(el, CreateOptions());
         }
 
         function destroy() {
@@ -82,6 +91,13 @@
             if (pp == null)
                 return;
             pp.Destroy();
+        }
+
+        function logout() {
+            var pp = window.powerplanning;
+            if (pp == null)
+                return;
+            pp.Logout();
         }
     </script>
 </head>
@@ -94,9 +110,12 @@
     <input type="button" onclick="create2()" value="Create2" />
     <input type="button" onclick="create3()" value="Create3" />
     <input type="button" onclick="destroy()" value="Destroy" />
+    <input type="button" onclick="logout()" value="Logout" />
     <br />
+    <span>Object Code:</span><input id="objectCode" type="text" value="167" />
     <span>User email:</span><input id="email" type="text" value="admin@sysphera.com" />
     <span>Objects Parent:</span><input id="objectsParent" type="text" value="" />
+
     <br />
     <div class="object" id="objects"></div>
     <div class="object" id="obj1"></div>
