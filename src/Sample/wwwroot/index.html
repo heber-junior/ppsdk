@@ -11,103 +11,17 @@
             width: 700px;
         }
     </style>
-    <script src="http://localhost:9900/js/pp.sdk.min.js"></script>
-    <script>
-        function configure() {
-            var pp = window.powerplanning;
-            if (pp == null)
-                return;
-            pp.Configurate({ Url: 'http://localhost:9900' });
-        }
-
-        function impersonate() {
-            var pp = window.powerplanning;
-            if (pp == null)
-                return;
-            var el = document.getElementById('email');
-            pp.Impersonate(el.value);
-        }
-
-        function getObjects() {
-            var pp = window.powerplanning;
-            if (pp == null)
-                return;
-            var el = document.getElementById('objects');
-            var elp = document.getElementById('objectsParent');
-            while (el.childNodes.length > 0)
-                el.removeChild(el.childNodes[0]);
-            pp.GetObjects(elp.value).then((objects) => {
-                if (objects == null)
-                    return;
-                var fragment = document.createDocumentFragment();
-                var i = 0;
-                for (i = 0; i < objects.length; i++) {
-                    var object = objects[i];
-                    var elc = document.createElement('span');
-                    elc.innerText = object.Name;
-                    fragment.appendChild(elc);
-                    var elbr = document.createElement('br');
-                     fragment.appendChild(elbr);
-                }
-                el.appendChild(fragment);
-            }).catch((e) => {
-                var el = document.getElementById('exception');
-                el.value = e;
-            });
-        }
-
-        function CreateOptions()
-        {
-            var elc = document.getElementById('objectCode');
-            var obj = {};
-            obj.Code = elc.value;
-            return (obj);
-        }
-
-        function create1() {
-            var pp = window.powerplanning;
-            if (pp == null)
-                return;
-            var el = document.getElementById('obj1');
-            
-            pp.Create(el, CreateOptions());
-        }
-
-        function create2() {
-            var pp = window.powerplanning;
-            if (pp == null)
-                return;
-            var el = document.getElementById('obj2');
-            pp.Create(el, CreateOptions());
-        }
-
-        function create3() {
-            var pp = window.powerplanning;
-            if (pp == null)
-                return;
-            var el = document.getElementById('obj3');
-            pp.Create(el, CreateOptions());
-        }
-
-        function destroy() {
-            var pp = window.powerplanning;
-            if (pp == null)
-                return;
-            pp.Destroy();
-        }
-
-        function logout() {
-            var pp = window.powerplanning;
-            if (pp == null)
-                return;
-            pp.Logout();
-        }
-    </script>
+    <script src="https://localhost:9999/js/pp.sdk.min.js"></script>
+    <script src="functions.js"></script>
 </head>
 <body>
     <p>This is a sample of PowerPlanning SDK</p>
     <input type="button" onclick="configure()" value="Configure" />
+    <input type="button" onclick="getCurrentUserEmail()" value="GetCurrentUserEmail" />
+    <input type="button" onclick="isAuthenticated()" value="isAuthenticated" />
     <input type="button" onclick="impersonate()" value="Impersonate" />
+    <input type="button" onclick="isImpersonated()" value="isImpersonated" />
+    <input type="button" onclick="undoImpersonate()" value="undoImpersonate" />
     <input type="button" onclick="getObjects()" value="GetObjects" />
     <input type="button" onclick="create1()" value="Create1" />
     <input type="button" onclick="create2()" value="Create2" />
@@ -115,12 +29,14 @@
     <input type="button" onclick="destroy()" value="Destroy" />
     <input type="button" onclick="logout()" value="Logout" />
     <br />
-    <span>Object Code:</span><input id="objectCode" type="text" value="167" />
-    <span>User email:</span><input id="email" type="text" value="admin@sysphera.com" />
-    <span>Objects Parent:</span><input id="objectsParent" type="text" value="" />
+    <span>Object Code:</span><input id="objectCode" type="text" value="" />
+    <span>User email:</span><input id="email" type="text" value="hjunior@tech6group.com" />
+    <span>Objects Parent:</span><input id="objectsParent" type="text" value="2193" />
     <span>Exception:</span><input id="exception" type="text" value="" />
 
     <br />
+    <label>Results:</label><br>
+    <div class="object" id="logResult"></div>
     <div class="object" id="objects"></div>
     <div class="object" id="obj1"></div>
     <div class="object" id="obj2"></div>
