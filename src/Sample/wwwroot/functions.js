@@ -17,7 +17,8 @@ function undoImpersonate() {
     const pp = window.powerplanning;
     if (pp == null) return;
     cleanResults();
-    pp.UndoImpersonate();
+    pp.UndoImpersonate()
+        .catch((e) => logException(e));
 }
 
 function isImpersonated() {
